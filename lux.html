@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lux Beauty - AI-Powered Booking by Ariah Desk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF8F5; /* Soft pink background */
+            color: #4A4A4A;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+        }
+        .text-brand-primary { color: #D4AF37; } /* Gold color */
+        .bg-brand-primary { background-color: #333; } /* Dark charcoal */
+        .bg-brand-secondary { background-color: #D4AF37; } /* Gold color */
+        .border-brand-primary { border-color: #D4AF37; }
+
+        /* Scroll Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header on Scroll */
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Chat Widget Animations & Styling */
+        #chat-widget-container.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        #chat-widget-container {
+            opacity: 0;
+            transform-origin: bottom right;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        
+        .chat-bubble {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .user-bubble {
+            background-color: #333;
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        .bot-bubble {
+            background-color: #f3f4f6;
+            color: #374151;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        /* Custom scrollbar for chat */
+        #chat-messages::-webkit-scrollbar { width: 6px; }
+        #chat-messages::-webkit-scrollbar-track { background: #f1f1f1; }
+        #chat-messages::-webkit-scrollbar-thumb { background: #ccc; border-radius: 6px; }
+        #chat-messages::-webkit-scrollbar-thumb:hover { background: #aaa; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header --><header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-900 tracking-wider">LUX BEAUTY</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#services" class="text-gray-600 hover:text-brand-primary transition-colors">Services</a>
+                <a href="#about" class="text-gray-600 hover:text-brand-primary transition-colors">About</a>
+                <a href="#contact" class="text-gray-600 hover:text-brand-primary transition-colors">Contact</a>
+            </div>
+            <button id="openChatBtnNav" class="bg-brand-primary text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity duration-300 shadow-md hidden md:block">Book Now</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section --><main class="container mx-auto px-6 pt-32">
+        <section class="py-20 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-4 leading-tight reveal">Timeless Elegance, Modern Booking.</h1>
+                <p class="text-lg text-gray-600 mb-8 reveal" style="transition-delay: 200ms;">Welcome to Lux Beauty, where classic glamour meets effortless convenience. Schedule your next moment of luxury with our 24/7 AI assistant, powered by Ariah Desk.</p>
+            </div>
+             <div class="mt-16 reveal" style="transition-delay: 400ms;">
+                <img src="https://image.pollinations.ai/prompt/luxurious%20beauty%20salon%20interior,%20elegant%20design,%20gold%20accents,%20soft%20lighting,%20empty%20chairs%20and%20mirrors,%20high%20quality,%20photorealistic" alt="Elegant salon interior" class="rounded-3xl shadow-2xl mx-auto object-cover">
+            </div>
+        </section>
+
+        <!-- Services Section --><section id="services" class="py-20">
+            <h2 class="text-4xl font-bold text-center mb-16 reveal">Our Signature Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service Card 1 --><div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal">
+                    <div class="flex items-center gap-4 mb-4"><i data-lucide="scissors" class="text-brand-primary"></i><h3 class="text-2xl font-bold">Haircuts & Styling</h3></div>
+                    <img src="https://image.pollinations.ai/prompt/woman%20getting%20a%20modern%20haircut%20in%20a%20luxury%20salon,%20stylist%20working,%20soft%20focus%20background,%20high%20quality" alt="Haircut & Styling" class="w-full h-40 object-cover rounded-xl mb-4">
+                    <p class="text-gray-600 mb-4">From modern cuts to timeless styles, our artists will craft the perfect look for you.</p>
+                    <span class="text-brand-primary font-semibold text-lg">$75+</span>
+                </div>
+                <!-- Service Card 2 --><div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal">
+                    <div class="flex items-center gap-4 mb-4"><i data-lucide="palette" class="text-brand-primary"></i><h3 class="text-2xl font-bold">Expert Hair Coloring</h3></div>
+                    <img src="https://image.pollinations.ai/prompt/hair%20coloring%20process%20in%20a%20salon,%20stylist%20applying%20color,%20client%20with%20foils,%20close%20up,%20professional%20setting,%20high%20quality" alt="Hair Coloring" class="w-full h-40 object-cover rounded-xl mb-4">
+                    <p class="text-gray-600 mb-4">Balayage, highlights, or a full color transformation for stunning results.</p>
+                    <span class="text-brand-primary font-semibold text-lg">$150+</span>
+                </div>
+                <!-- Service Card 3 --><div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal">
+                    <div class="flex items-center gap-4 mb-4"><i data-lucide="sparkles" class="text-brand-primary"></i><h3 class="text-2xl font-bold">Luxury Manicures</h3></div>
+                    <img src="https://image.pollinations.ai/prompt/woman%20getting%20a%20manicure%20in%20a%20luxury%20spa,%20hands%20in%20bowl,%20relaxing%20atmosphere,%20close%20up,%20high%20quality" alt="Manicure" class="w-full h-40 object-cover rounded-xl mb-4">
+                    <p class="text-gray-600 mb-4">Indulge in a relaxing manicure that leaves your nails looking flawless.</p>
+                    <span class="text-brand-primary font-semibold text-lg">$50+</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section --><section id="about" class="py-20 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 reveal">
+                <img src="https://image.pollinations.ai/prompt/professional%20and%20friendly%20salon%20team,%20diverse%20stylists%20smiling,%20modern%20salon%20background,%20high%20quality" alt="Our team of stylists" class="rounded-3xl shadow-2xl w-full">
+            </div>
+            <div class="md:w-1/2 reveal">
+                <h2 class="text-4xl font-bold mb-6">The Art of Beauty</h2>
+                <p class="text-gray-600 mb-4 leading-relaxed">Founded on a passion for transformative beauty, Lux Beauty is a sanctuary of self-care. We believe booking your moment of relaxation should be as peaceful as the experience itself. That's why we've partnered with Ariah Desk to bring you seamless, 24/7 AI-powered appointment scheduling.</p>
+                <p class="text-gray-600 leading-relaxed">Our team of talented stylists and technicians is dedicated to providing you with the highest quality service in a friendly and luxurious environment.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section --><section id="contact" class="py-20 text-center reveal">
+             <h2 class="text-4xl font-bold mb-6">Visit Our Salon</h2>
+             <p class="text-gray-600 mb-4">We would be delighted to welcome you.</p>
+             <p class="text-lg font-medium">123 Glamour Ave, New York, NY 10001</p>
+             <p class="text-lg font-medium">(212) 555-0123</p>
+             <div class="mt-8 h-80 w-full max-w-4xl mx-auto rounded-2xl shadow-md overflow-hidden">
+                 <img src="https://image.pollinations.ai/prompt/stylized%20map%20pin%20on%20a%20minimalist%20city%20map,%20luxury%20salon%20location,%20graphic%20design" alt="Map to salon" class="rounded-2xl w-full h-full object-cover">
+             </div>
+        </section>
+    </main>
+
+    <!-- Footer --><footer class="bg-white border-t mt-12">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-600">
+            <p>&copy; 2025 Lux Beauty. All Rights Reserved.</p>
+            <p class="text-sm mt-2">Booking powered by <span class="font-bold" style="color: #333;">Ariah Desk</span></p>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button --><button id="floatingChatBtn" class="fixed bottom-5 right-5 w-16 h-16 bg-brand-primary rounded-full shadow-xl flex items-center justify-center text-white z-50 transform hover:scale-110 transition-transform">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </button>
+    
+    <!-- Chatbot Widget --><div id="chat-widget-container" class="fixed bottom-24 right-5 w-80 sm:w-96 h-[60vh] sm:h-[70vh] max-h-[600px] z-40">
+        <div class="w-full h-full bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border">
+            <div class="bg-brand-primary p-4 text-white flex justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-lg">Ariah Desk Assistant</h3>
+                    <p class="text-sm opacity-90">Salon Booking</p>
+                </div>
+                <button id="closeChatBtn" class="text-white hover:opacity-80 text-3xl leading-none">&times;</button>
+            </div>
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col space-y-2"></div>
+            <div id="chat-input-container" class="p-4 border-t bg-gray-50"></div>
+        </div>
+    </div>
+
+
+    <script >
+        // --- Initialize Icons ---
+        lucide.createIcons();
+
+        // --- DOM Elements ---
+        const openChatBtnNav = document.getElementById('openChatBtnNav');
+        const floatingChatBtn = document.getElementById('floatingChatBtn');
+        const closeChatBtn = document.getElementById('closeChatBtn');
+        const chatWidgetContainer = document.getElementById('chat-widget-container');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInputContainer = document.getElementById('chat-input-container');
+        const header = document.querySelector('header');
+
+        // --- Chat State ---
+        let chatOpen = false;
+
+        // --- Event Listeners ---
+        openChatBtnNav.addEventListener('click', openChat);
+        floatingChatBtn.addEventListener('click', toggleChat);
+        closeChatBtn.addEventListener('click', closeChat);
+        
+        // --- Scroll Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add visibility to hero on load
+        window.addEventListener('load', () => {
+             document.querySelectorAll('.hero .reveal, .py-20.text-center .reveal').forEach(el => {
+                 setTimeout(() => el.classList.add('visible'), 100);
+             });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- Chat Functions ---
+        function openChat() {
+             if (chatOpen) return;
+             chatOpen = true;
+             chatWidgetContainer.classList.add('open');
+             if (chatMessages.children.length === 0) {
+                 startConversation();
+             }
+        }
+
+        function closeChat() {
+             if (!chatOpen) return;
+             chatOpen = false;
+             chatWidgetContainer.classList.remove('open');
+        }
+
+        function toggleChat() {
+            chatOpen ? closeChat() : openChat();
+        }
+
+        function addBotMessage(message) {
+            const messageEl = document.createElement('div');
+            messageEl.className = 'chat-bubble bot-bubble';
+            messageEl.innerHTML = message;
+            chatMessages.appendChild(messageEl);
+            scrollToBottom();
+        }
+
+        function addUserMessage(message) {
+            const messageEl = document.createElement('div');
+            messageEl.className = 'chat-bubble user-bubble';
+            messageEl.textContent = message;
+            chatMessages.appendChild(messageEl);
+            scrollToBottom();
+        }
+        
+        function showLoadingIndicator() {
+            const loadingEl = document.createElement('div');
+            loadingEl.id = 'loading-indicator';
+            loadingEl.className = 'chat-bubble bot-bubble flex items-center space-x-2';
+            loadingEl.innerHTML = `<div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0s;"></div><div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div><div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>`;
+            chatMessages.appendChild(loadingEl);
+            scrollToBottom();
+        }
+
+        function removeLoadingIndicator() {
+            const loadingEl = document.getElementById('loading-indicator');
+            if (loadingEl) loadingEl.remove();
+        }
+
+        function showOptions(options) {
+            chatInputContainer.innerHTML = '';
+            const optionsWrapper = document.createElement('div');
+            optionsWrapper.className = 'chat-options grid grid-cols-2 gap-2';
+
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded-lg text-sm hover:bg-gray-100 hover:border-brand-primary transition-colors';
+                button.textContent = option.text;
+                button.onclick = () => handleOptionClick(option.text, option.action);
+                optionsWrapper.appendChild(button);
+            });
+            chatInputContainer.appendChild(optionsWrapper);
+        }
+
+        function handleOptionClick(text, action) {
+            addUserMessage(text);
+            chatInputContainer.innerHTML = '';
+            showLoadingIndicator();
+            
+            setTimeout(() => {
+                removeLoadingIndicator();
+                action();
+            }, 1200);
+        }
+
+        function scrollToBottom() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // --- Conversation Flow ---
+        function startConversation() {
+             showLoadingIndicator();
+             setTimeout(() => {
+                removeLoadingIndicator();
+                addBotMessage("Hi there! I'm the Ariah Desk assistant. How can I help you today?");
+                showOptions([
+                    { text: "Book Appointment", action: askForService },
+                    { text: "Reschedule/Cancel", action: handleReschedule },
+                ]);
+             }, 1000);
+        }
+        
+        function handleReschedule() {
+            addBotMessage("No problem. To find your appointment, please provide the phone number used for booking.");
+            chatInputContainer.innerHTML = `<p class="text-xs text-center text-gray-500">Demo only. <a href="#" onclick="restartChat(event)" class="text-brand-primary">Restart</a></p>`;
+        }
+        
+        function restartChat(event) {
+            event.preventDefault();
+            chatMessages.innerHTML = '';
+            chatInputContainer.innerHTML = '';
+            startConversation();
+        }
+
+        function askForService() {
+            addBotMessage("Wonderful! Which of our signature services are you interested in?");
+            showOptions([
+                { text: "Haircut & Style", action: () => selectService("Haircut & Style") },
+                { text: "Hair Coloring", action: () => selectService("Hair Coloring") },
+                { text: "Manicure", action: () => selectService("Manicure") },
+                { text: "Other", action: () => addBotMessage("For other services, please call us at (212) 555-0123.")},
+            ]);
+        }
+        
+        function selectService(serviceName) {
+            addBotMessage(`Excellent choice. When would you like to book your ${serviceName}?`);
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            showOptions([
+                { text: `Today (${today.toLocaleDateString('en-US', { weekday: 'short' })})`, action: () => selectDay("Today") },
+                { text: `Tomorrow (${tomorrow.toLocaleDateString('en-US', { weekday: 'short' })})`, action: () => selectDay("Tomorrow") },
+                { text: "This Weekend", action: () => selectDay("This Weekend") },
+                { text: "Next Week", action: () => selectDay("Next Week") },
+            ]);
+        }
+        
+        function selectDay(day) {
+            addBotMessage(`Ok, looking for available times for ${day}. What time of day works best for you?`);
+             showOptions([
+                { text: "Morning (9am-12pm)", action: () => findTimeSlot("Morning") },
+                { text: "Afternoon (12pm-4pm)", action: () => findTimeSlot("Afternoon") },
+                { text: "Evening (4pm-7pm)", action: () => findTimeSlot("Evening") },
+             ]);
+        }
+
+        function findTimeSlot(time) {
+            const availableSlots = {
+                "Morning": ["9:30 AM", "11:00 AM"],
+                "Afternoon": ["1:15 PM", "2:45 PM"],
+                "Evening": ["5:00 PM", "6:30 PM"]
+            };
+            const slots = availableSlots[time];
+            addBotMessage(`Great! I have two available slots: ${slots[0]} and ${slots[1]}. Which would you like?`);
+            showOptions([
+                { text: slots[0], action: () => confirmBooking(slots[0]) },
+                { text: slots[1], action: () => confirmBooking(slots[1]) },
+            ]);
+        }
+
+        function confirmBooking(time) {
+            addBotMessage(`Perfect! We have you down for ${time}. To finalize, I just need your first name.`);
+            chatInputContainer.innerHTML = `<p class="text-xs text-center text-gray-500">In a real app, you would enter your name here. This is the end of the demo flow.</p><button onclick="restartChat(event)" class="w-full mt-2 bg-brand-primary text-white text-sm py-2 rounded-lg">Start Over</button>`;
+        }
+
+        
+
+    </script>
+
+
+    
+</body>
+</html>
